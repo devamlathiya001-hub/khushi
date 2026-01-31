@@ -66,10 +66,6 @@
 </head>
 
 <body>
-<audio id="bgMusic" loop></audio>
-<button onclick="toggleMusic()" class="music-btn">🎵 Play Music</button>
-
-
   <h1>More Moments 🤍</h1>
 
   <div class="gallery">
@@ -122,70 +118,7 @@
       <img src="images 3/Snapchat-138721383.jpg">
       <p class="desc"><b>Nothing forced, all natural 😌📷</b></p>
     </div>
-
-
    <a href="devam.html" class="back">← Back</a>
-<script>
-  var music = document.getElementById("bgMusic");
-  var musicBtn = document.querySelector(".music-btn");
-
-  // 🎶 PLAYLIST
-  var playlist = [
-  	"Uden Jab Jab Zulfen Teri (Form Naya Daur).mp3",
-    "Jigardan_Gadhavi_Kavya_Limaye_-_RAMO_RE_-_Navratri_2025_(mp3.pm).mp3",
-    "Ehsaas Faheem Abdullah 320 Kbps.mp3",
-    "Tere Liye(KoshalWorld.Com).mp3"
-  ];
-
-  var currentTrack = localStorage.getItem("currentTrack")
-    ? parseInt(localStorage.getItem("currentTrack"))
-    : 0;
-
-  // Load current track
-  music.src = playlist[currentTrack];
-
-  // Restore time
-  music.addEventListener("loadedmetadata", function () {
-    var savedTime = localStorage.getItem("musicTime");
-    if (savedTime) {
-      music.currentTime = savedTime;
-    }
-
-    if (localStorage.getItem("musicPlaying") === "true") {
-      music.play();
-      if (musicBtn) musicBtn.innerText = "⏸ Pause Music";
-    }
-  });
-
-  // When song ends → play next
-  music.addEventListener("ended", function () {
-    currentTrack++;
-    if (currentTrack >= playlist.length) {
-      currentTrack = 0; // loop back
-    }
-
-    localStorage.setItem("currentTrack", currentTrack);
-    music.src = playlist[currentTrack];
-    music.play();
-  });
-
-  function toggleMusic() {
-    if (music.paused) {
-      music.play();
-      localStorage.setItem("musicPlaying", "true");
-      if (musicBtn) musicBtn.innerText = "⏸ Pause Music";
-    } else {
-      music.pause();
-      localStorage.setItem("musicPlaying", "false");
-      if (musicBtn) musicBtn.innerText = "🎵 Play Music";
-    }
-  }
-
-  // Save time before page change
-  window.addEventListener("beforeunload", function () {
-    localStorage.setItem("musicTime", music.currentTime);
-  });
-</script>
-
 </body>
 </html>
+
