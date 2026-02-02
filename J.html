@@ -2,92 +2,85 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ✨</title>
+<title>Just Between Us ✨</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
   height:100vh;
-  font-family:'Poppins',sans-serif;
-  background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);
-  background-size:400% 400%;
-  animation:bgMove 12s ease infinite;
+  background: radial-gradient(circle at top,#1a1a2e,#000);
   display:flex;
   justify-content:center;
   align-items:center;
-}
-
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+  font-family:'Poppins',sans-serif;
+  color:#fff;
 }
 
 .card{
   width:90%;
   max-width:420px;
-  padding:35px;
-  border-radius:24px;
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow:0 25px 50px rgba(0,0,0,0.25);
+  padding:40px 35px;
+  border-radius:28px;
+  background: linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04));
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 0 40px rgba(255,105,180,0.35),
+    inset 0 0 30px rgba(255,255,255,0.08);
   text-align:center;
-  color:#fff;
-  animation:fadeIn 1.2s ease;
+  animation:softIn 1.4s ease;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
+@keyframes softIn{
+  from{opacity:0; transform:translateY(30px);}
   to{opacity:1; transform:translateY(0);}
 }
 
 h1{
+  font-family:'Playfair Display',serif;
   font-weight:600;
-  margin-bottom:10px;
+  letter-spacing:1px;
 }
 
 p{
   font-size:14px;
-  line-height:1.7;
-  opacity:0.95;
+  line-height:1.8;
+  opacity:0.9;
 }
 
 button{
-  margin-top:25px;
-  padding:12px 28px;
+  margin-top:28px;
+  padding:12px 32px;
   border:none;
-  border-radius:30px;
+  border-radius:40px;
   font-size:14px;
   cursor:pointer;
-  background:#fff;
-  color:#333;
-  transition:0.3s;
+  background:linear-gradient(135deg,#ff4ecd,#ff758c);
+  color:white;
+  transition:0.4s;
+  box-shadow:0 0 20px rgba(255,78,205,0.6);
 }
 
 button:hover{
-  transform:scale(1.05);
+  transform:scale(1.08);
+  box-shadow:0 0 30px rgba(255,78,205,0.9);
 }
 
-.secondary{
+.alt{
   background:transparent;
-  color:#fff;
-  border:1px solid rgba(255,255,255,0.6);
+  border:1px solid rgba(255,255,255,0.5);
+  box-shadow:none;
 }
 
-.hidden{
-  display:none;
-}
+.hidden{display:none;}
 
 #question{
+  margin:35px 0;
   font-size:16px;
-  margin:30px 0;
+  font-family:'Playfair Display',serif;
 }
 </style>
 </head>
@@ -98,15 +91,79 @@ button:hover{
 
   <!-- INTRO -->
   <div id="intro">
-    <h1>Hey ✨</h1>
+    <h1>Hey… ✨</h1>
     <p>
-      This isn’t something dramatic.<br>
-      Just something honest.<br><br>
-      Take it slow.
+      This isn’t loud.<br>
+      It’s quiet. Intentional.<br><br>
+      Just like attraction should be.
     </p>
     <button onclick="start()">Continue</button>
   </div>
 
+  <!-- QUESTIONS -->
+  <div id="questions" class="hidden">
+    <h1>Tell Me…</h1>
+    <div id="question"></div>
+    <button onclick="next()">Next</button>
+  </div>
+
+  <!-- PROPOSAL -->
+  <div id="proposal" class="hidden">
+    <h1>Be Honest 💫</h1>
+    <p>
+      I feel drawn to you.<br>
+      Not rushed. Not forced.<br><br>
+      Just curious…<br>
+      and wanting more of this feeling.<br><br>
+      Would you like to explore that with me?
+    </p>
+
+    <button onclick="yes()">Yes 🙂</button>
+    <button class="alt" onclick="time()">I need time 🌙</button>
+
+    <p id="final" style="margin-top:25px;"></p>
+  </div>
+
+</div>
+
+<script>
+const q = [
+  "What kind of energy attracts you?",
+  "Do you like slow conversations or instant sparks?",
+  "What makes someone irresistible to you?",
+  "Late nights… or early mornings?",
+  "Do you believe chemistry is rare?"
+];
+
+let i=0;
+
+function start(){
+  intro.classList.add("hidden");
+  questions.classList.remove("hidden");
+  question.innerText = q[i];
+}
+
+function next(){
+  i++;
+  if(i<q.length){
+    question.innerText = q[i];
+  }else{
+    questions.classList.add("hidden");
+    proposal.classList.remove("hidden");
+  }
+}
+
+function yes(){
+  final.innerHTML="I’m glad you felt it too ✨<br>Let’s take it slow… and real.";
+}
+
+function time(){
+  final.innerHTML="That’s attractive too 🌙<br>Take your time.";
+}
+</script>
+
+</body>
+</html>
   <!-- QUESTIONS -->
   <div id="questions" class="hidden">
     <h1>Just Curious 🌙</h1>
