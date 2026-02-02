@@ -25,24 +25,15 @@ body{
   max-width:420px;
   padding:40px 35px;
   border-radius:28px;
-  background: linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04));
+  background: rgba(255,255,255,0.12);
   backdrop-filter: blur(18px);
-  box-shadow:
-    0 0 40px rgba(255,105,180,0.35),
-    inset 0 0 30px rgba(255,255,255,0.08);
+  box-shadow:0 0 40px rgba(255,78,205,0.45);
   text-align:center;
-  animation:softIn 1.4s ease;
-}
-
-@keyframes softIn{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
 }
 
 h1{
   font-family:'Playfair Display',serif;
   font-weight:600;
-  letter-spacing:1px;
 }
 
 p{
@@ -60,22 +51,21 @@ button{
   cursor:pointer;
   background:linear-gradient(135deg,#ff4ecd,#ff758c);
   color:white;
-  transition:0.4s;
-  box-shadow:0 0 20px rgba(255,78,205,0.6);
+  transition:0.3s;
 }
 
 button:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 30px rgba(255,78,205,0.9);
+  transform:scale(1.07);
 }
 
 .alt{
   background:transparent;
-  border:1px solid rgba(255,255,255,0.5);
-  box-shadow:none;
+  border:1px solid rgba(255,255,255,0.6);
 }
 
-.hidden{display:none;}
+.hidden{
+  display:none;
+}
 
 #question{
   margin:35px 0;
@@ -89,155 +79,76 @@ button:hover{
 
 <div class="card">
 
-  <!-- INTRO -->
   <div id="intro">
     <h1>Hey… ✨</h1>
     <p>
-      This isn’t loud.<br>
-      It’s quiet. Intentional.<br><br>
+      This is quiet.<br>
+      Intentional.<br><br>
       Just like attraction should be.
     </p>
-    <button onclick="start()">Continue</button>
+    <button id="startBtn">Continue</button>
   </div>
 
-  <!-- QUESTIONS -->
   <div id="questions" class="hidden">
     <h1>Tell Me…</h1>
     <div id="question"></div>
-    <button onclick="next()">Next</button>
+    <button id="nextBtn">Next</button>
   </div>
 
-  <!-- PROPOSAL -->
   <div id="proposal" class="hidden">
     <h1>Be Honest 💫</h1>
     <p>
       I feel drawn to you.<br>
-      Not rushed. Not forced.<br><br>
-      Just curious…<br>
-      and wanting more of this feeling.<br><br>
-      Would you like to explore that with me?
+      Calm. Natural.<br><br>
+      Would you like to explore this feeling with me?
     </p>
-
-    <button onclick="yes()">Yes 🙂</button>
-    <button class="alt" onclick="time()">I need time 🌙</button>
-
+    <button id="yesBtn">Yes 🙂</button>
+    <button class="alt" id="timeBtn">I need time 🌙</button>
     <p id="final" style="margin-top:25px;"></p>
   </div>
 
 </div>
 
 <script>
-const q = [
+const questions = [
   "What kind of energy attracts you?",
-  "Do you like slow conversations or instant sparks?",
-  "What makes someone irresistible to you?",
-  "Late nights… or early mornings?",
+  "Slow conversations or instant sparks?",
+  "What makes someone irresistible?",
+  "Late nights or early mornings?",
   "Do you believe chemistry is rare?"
 ];
 
-let i=0;
+let index = 0;
 
-function start(){
+const intro = document.getElementById("intro");
+const questionsBox = document.getElementById("questions");
+const proposal = document.getElementById("proposal");
+const questionText = document.getElementById("question");
+const finalMsg = document.getElementById("final");
+
+document.getElementById("startBtn").onclick = () => {
   intro.classList.add("hidden");
-  questions.classList.remove("hidden");
-  question.innerText = q[i];
-}
+  questionsBox.classList.remove("hidden");
+  questionText.innerText = questions[index];
+};
 
-function next(){
-  i++;
-  if(i<q.length){
-    question.innerText = q[i];
-  }else{
-    questions.classList.add("hidden");
+document.getElementById("nextBtn").onclick = () => {
+  index++;
+  if(index < questions.length){
+    questionText.innerText = questions[index];
+  } else {
+    questionsBox.classList.add("hidden");
     proposal.classList.remove("hidden");
   }
-}
+};
 
-function yes(){
-  final.innerHTML="I’m glad you felt it too ✨<br>Let’s take it slow… and real.";
-}
+document.getElementById("yesBtn").onclick = () => {
+  finalMsg.innerHTML = "I’m glad you felt it too ✨<br>Let’s take this slow and real.";
+};
 
-function time(){
-  final.innerHTML="That’s attractive too 🌙<br>Take your time.";
-}
-</script>
-
-</body>
-</html>
-  <!-- QUESTIONS -->
-  <div id="questions" class="hidden">
-    <h1>Just Curious 🌙</h1>
-    <div id="question"></div>
-    <button onclick="next()">Next</button>
-  </div>
-
-  <!-- PROPOSAL -->
-  <div id="proposal" class="hidden">
-    <h1>One Last Thing 💫</h1>
-    <p>
-      Talking to you feels easy.<br>
-      Comfortable. Natural.<br><br>
-      I don’t want to rush anything.<br>
-      I just wanted to be honest.<br><br>
-      Would you like to explore something more with me?
-    </p>
-    <button onclick="yes()">Yes 🙂</button>
-    <button class="secondary" onclick="time()">I need time 🌱</button>
-    <p id="final"></p>
-  </div>
-
-</div>
-
-<script>
-const qs = [
-  "What kind of things make you feel calm?",
-  "Late nights or early mornings?",
-  "What makes a conversation comfortable?",
-  "Which song feels like home to you?",
-  "Do you like peaceful people?"
-];
-
-let i=0;
-
-function start(){
-  intro.classList.add("hidden");
-  questions.classList.remove("hidden");
-  question.innerText = qs[i];
-}
-
-function next(){
-  i++;
-  if(i<qs.length){
-    question.innerText = qs[i];
-  }else{
-    questions.classList.add("hidden");
-    proposal.classList.remove("hidden");
-  }
-}
-
-function yes(){
-  final.innerHTML="That made me smile 💖<br>Thank you for trusting this moment.";
-}
-
-function time(){
-  final.innerHTML="That’s completely okay 🌱<br>Take your time. I respect you.";
-}
-</script>
-
-</body>
-</html>    document.getElementById("proposalBox").style.display="block";
-  }
-}
-
-function yesAnswer(){
-  document.getElementById("finalMsg").innerHTML =
-  "That means more than you know 💖<br>Thank you for trusting this moment ✨";
-}
-
-function timeAnswer(){
-  document.getElementById("finalMsg").innerHTML =
-  "That’s completely okay 🌱<br>Take all the time you need. I respect you.";
-}
+document.getElementById("timeBtn").onclick = () => {
+  finalMsg.innerHTML = "That’s attractive too 🌙<br>Take your time.";
+};
 </script>
 
 </body>
