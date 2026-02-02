@@ -13,6 +13,7 @@ body{
   margin:0;
   height:100vh;
   background: radial-gradient(circle at top,#1a1a2e,#000);
+  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -20,6 +21,28 @@ body{
   color:#fff;
 }
 
+/* floating lights */
+body::before, body::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  background:rgba(255,78,205,0.35);
+  filter:blur(120px);
+  animation:float 12s infinite alternate ease-in-out;
+}
+
+body::after{
+  background:rgba(120,150,255,0.35);
+  animation-delay:6s;
+}
+
+@keyframes float{
+  from{transform:translate(-100px,-100px);}
+  to{transform:translate(200px,200px);}
+}
+
+/* card */
 .card{
   width:90%;
   max-width:420px;
@@ -27,8 +50,19 @@ body{
   border-radius:28px;
   background: rgba(255,255,255,0.12);
   backdrop-filter: blur(18px);
-  box-shadow:0 0 40px rgba(255,78,205,0.45);
+  box-shadow:0 0 45px rgba(255,78,205,0.5);
   text-align:center;
+  animation:cardPulse 6s infinite ease-in-out, fadeIn 1.2s ease;
+}
+
+@keyframes cardPulse{
+  0%,100%{box-shadow:0 0 35px rgba(255,78,205,0.4);}
+  50%{box-shadow:0 0 60px rgba(255,78,205,0.8);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(25px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 h1{
@@ -39,7 +73,13 @@ h1{
 p{
   font-size:14px;
   line-height:1.8;
-  opacity:0.9;
+  opacity:0.92;
+  animation:textFade 1.5s ease;
+}
+
+@keyframes textFade{
+  from{opacity:0;}
+  to{opacity:0.92;}
 }
 
 button{
@@ -55,7 +95,8 @@ button{
 }
 
 button:hover{
-  transform:scale(1.07);
+  transform:scale(1.08);
+  box-shadow:0 0 25px rgba(255,78,205,0.8);
 }
 
 .alt{
@@ -63,9 +104,7 @@ button:hover{
   border:1px solid rgba(255,255,255,0.6);
 }
 
-.hidden{
-  display:none;
-}
+.hidden{display:none;}
 
 #question{
   margin:35px 0;
@@ -143,6 +182,16 @@ document.getElementById("nextBtn").onclick = () => {
 };
 
 document.getElementById("yesBtn").onclick = () => {
+  finalMsg.innerHTML = "I’m glad you felt it too ✨<br>Let’s take this slow and real.";
+};
+
+document.getElementById("timeBtn").onclick = () => {
+  finalMsg.innerHTML = "That’s attractive too 🌙<br>Take your time.";
+};
+</script>
+
+</body>
+</html>document.getElementById("yesBtn").onclick = () => {
   finalMsg.innerHTML = "I’m glad you felt it too ✨<br>Let’s take this slow and real.";
 };
 
