@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Just a Few Questions ✨</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    #question {
+      font-size: 15px;
+      margin: 25px 0;
+      color: #333;
+      min-height: 40px;
+    }
+
+    button {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 25px;
+      background: #6c63ff;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #554ee0;
+    }
+
+    #end {
+      display: none;
+      font-size: 14px;
+      margin-top: 20px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Just a Few Questions ✨</h1>
+    <p>Answer in your head… or don’t. Both are okay 🙂</p>
+
+    <div id="question"></div>
+
+    <button onclick="nextQuestion()">Next</button>
+
+    <div id="end">
+      That’s it 🌙  
+      Thanks for taking a moment here ✨
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      "What kind of small thing makes you smile?",
+      "Do you prefer calm nights or fun chaos?",
+      "Which song feels like a safe place to you?",
+      "What’s something you enjoy but rarely talk about?",
+      "Coffee or chai?",
+      "What makes a conversation comfortable for you?"
+    ];
+
+    let index = 0;
+    const qBox = document.getElementById("question");
+
+    function nextQuestion() {
+      if (index < questions.length) {
+        qBox.textContent = questions[index];
+        index++;
+      } else {
+        qBox.style.display = "none";
+        document.querySelector("button").style.display = "none";
+        document.getElementById("end").style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
